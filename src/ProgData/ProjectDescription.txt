@@ -31,3 +31,5 @@ men utökas med GUI om tid finns.
   och inte vara diagonalt. kontrolleras via exceptions?
 - varannat skott. träff och bom markeras på respektive rutnät (vitt/o för bom och rött/x för träff)
 - skepp markeras upp med rött # vid träff med rött x. andra skott med svart o för bom.
+- När en spelare sänkt motståndarens alla skepp och rundan är avslutad så har den vunnit.
+- Om båda spelarna sänkt alla skepp under samma runda blir det oavgjort.
