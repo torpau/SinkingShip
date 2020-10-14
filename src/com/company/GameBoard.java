@@ -3,6 +3,8 @@ package com.company;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import static java.awt.Component.CENTER_ALIGNMENT;
 
@@ -38,6 +40,12 @@ public class GameBoard {
         printRightGridSideLabels();
         printRightGridButtons();
 
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent){
+                System.out.println("mother");
+                System.exit(0);
+            }
+        });
 
     }
 
