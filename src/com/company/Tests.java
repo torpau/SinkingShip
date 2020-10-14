@@ -17,8 +17,16 @@ public class Tests {
 
     @Test
     @Order(1)
-    @DisplayName("Tests if ")
+    @DisplayName("Tests if saved game exists")
     public void testIfGameIsSaved() {
         assertTrue(GameProgress.ifGameIsSaved(), "Saved game does not exist");
     }
+
+    @Test
+    @Order(2)
+    @DisplayName("Tests if ")
+    public void testIfShipsArePlaced() {
+
+    }
+
 }

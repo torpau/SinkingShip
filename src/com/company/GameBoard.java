@@ -12,6 +12,9 @@ public class GameBoard {
     public static JButton[] rightB = new JButton[101];
     private static final Font font = new Font("Verdana", Font.PLAIN, 12);
     private static final Border blackline = BorderFactory.createLineBorder(Color.black);
+    private static final Color shipFloating = new Color(45, 149, 63, 255);
+    private static final Color shipSunk = new Color(179, 11, 11);
+
 
     public GameBoard() {
 
@@ -22,15 +25,21 @@ public class GameBoard {
         f.setBounds(200, 150, frameWidth, frameHeight);
         f.setLayout(null);//using no layout managers
         f.setVisible(true);
-
-        printLeftGridTopLabels();
+        printLeftGridHeader();
+        printLeftGridTopLabels();  //vår planhalva
         printLeftGridSideLabels();
         printLeftGridButtons();
         printMidLine();
-        printRightGridTopLabels();
+        printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
         printRightGridButtons();
 
+
+    }
+
+    static void printLeftGridHeadLabel() {
+        JLabel leftHL = new JLabel("Your field");
+        leftHL.setBounds((frameWidth/4)+35), 15);
     }
 
     static void printLeftGridTopLabels() {
@@ -133,9 +142,10 @@ public class GameBoard {
                 rightB[i*j] = new JButton();
                 rightB[i*j].setBounds(width,height,44, 44);
                 rightB[i*j].setEnabled(true);
-                rightB[i*j].setText("X");
+                rightB[i*j].setText("");
                 f.add(rightB[i*j]);
                 width = width + 44;
+                rightB[i*j].setBackground(new Color(0, 0, 180-(15*i)));
             }
             width = (frameWidth/2) + 79;
             height = height + 44;

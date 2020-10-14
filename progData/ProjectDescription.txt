@@ -19,7 +19,7 @@ men utökas med GUI om tid finns.
 
 - spelplanen ska bestå av två rutnät som är 10 x 10
 - main för att placera ut dina skepp och motspelarens skott
-- secundary för att placera ut spelarens skott
+- secund    public void testIfGameIsSaved() {ary för att placera ut spelarens skott
 - namn och storlek på skepp som ska placeras ut ser du nedan.
   No.	Class of ship	Size
   1	  Carrier	        5
