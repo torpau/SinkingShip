@@ -18,22 +18,24 @@ public class GameProgress {
         JOptionPane cruiser = new JOptionPane();
         int choice = JOptionPane.showConfirmDialog(cruiser, "Place your Carrier\n Vertically or horizontally only\n Size: 5 squares", "Place Battleships", JOptionPane.OK_CANCEL_OPTION);
         if(choice == 2) {
-            quitGame();
+            quitGame(userDialogueCarrier());
         }
     }
 
-    static void quitGame() {
+    static void quitGame(Method metod) {
         JOptionPane quitGame = new JOptionPane();
         Object[] options ={"Yes, quit and save", "No, continue playing"};
         int choice = JOptionPane.showOptionDialog(quitGame, "Do you want to exit the game", "Quit game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         if(choice == 0) {
             saveGame();
+        } else {
+            metod
         }
 
     }
 
     static void saveGame() {
-       
+
 
 
     }
