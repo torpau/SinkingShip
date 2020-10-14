@@ -37,18 +37,6 @@ public class GameBoard {
         printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
         printRightGridButtons();
-        userDialogueFrameCruiser();
-
-    }
-
-    static void userDialogueFrameCruiser() {
-        //JFrame u = new JFrame();
-        //u.setBounds(frameWidth/2, frameHeight/2, 350, 250);
-        //u.setVisible(true);
-        //u.setAlwaysOnTop(true);
-
-        JOptionPane cruiser = new JOptionPane();
-        int choice = JOptionPane.showConfirmDialog(cruiser, "Place your Cruiser\n Vertically or horizontally only\n Size: 5 squares", "Place Battleships", JOptionPane.OK_CANCEL_OPTION);
 
 
     }
