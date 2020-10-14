@@ -29,7 +29,8 @@ public class GameBoard {
 
 
         printMidLine();
-        printMainGridTopLabels();
+        printLeftGridTopLabels();
+        printRightGridTopLabels();
         printMainGridButtons();
 
 
@@ -42,18 +43,34 @@ public class GameBoard {
         GameBoard.f.add(midLine);
     }
 
-    static void printMainGridTopLabels() {
+    static void printRightGridTopLabels() {
         int width = (frameWidth/2) + 35;
-        JLabel[] l = new JLabel[10];
+        JLabel[] right = new JLabel[10];
 
         for (int i = 0; i < 10; i++) {
-            l[i] = new JLabel(Character.toString((char) 65 + i));
-            l[i].setBounds(width, 35, 30, 20);
-            l[i].setBorder(blackline);
-            l[i].setHorizontalAlignment(JLabel.CENTER);
-            l[i].setVerticalAlignment(JLabel.CENTER);
-            l[i].setFont(font);
-            GameBoard.f.add(l[i]);
+            right[i] = new JLabel(Character.toString((char) 65 + i));
+            right[i].setBounds(width, 35, 30, 20);
+            right[i].setBorder(blackline);
+            right[i].setHorizontalAlignment(JLabel.CENTER);
+            right[i].setVerticalAlignment(JLabel.CENTER);
+            right[i].setFont(font);
+            GameBoard.f.add(right[i]);
+            width = width + 30;
+        }
+    }
+
+    static void printLeftGridTopLabels() {
+        int width = 35;
+        JLabel[] left = new JLabel[10];
+
+        for (int i = 0; i < 10; i++) {
+            left[i] = new JLabel(Character.toString((char) 65 + i));
+            left[i].setBounds(width, 35, 30, 20);
+            left[i].setBorder(blackline);
+            left[i].setHorizontalAlignment(JLabel.CENTER);
+            left[i].setVerticalAlignment(JLabel.CENTER);
+            left[i].setFont(font);
+            GameBoard.f.add(left[i]);
             width = width + 30;
         }
     }
@@ -70,11 +87,6 @@ public class GameBoard {
 
             }
         }
-
-
-
-
-
     }
 }
 
