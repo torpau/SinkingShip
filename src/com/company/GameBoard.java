@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+import static java.awt.Component.CENTER_ALIGNMENT;
+
 public class GameBoard {
     public static JFrame f = new JFrame();
     private static final int frameWidth = 1110;
@@ -25,21 +27,41 @@ public class GameBoard {
         f.setBounds(200, 150, frameWidth, frameHeight);
         f.setLayout(null);//using no layout managers
         f.setVisible(true);
-        printLeftGridHeader();
+
+        printLeftGridHeadLabel();
         printLeftGridTopLabels();  //vår planhalva
         printLeftGridSideLabels();
         printLeftGridButtons();
         printMidLine();
+        printRightGridHeadLabel();
         printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
         printRightGridButtons();
+        userDialogueFrameCruiser();
 
+    }
+
+    static void userDialogueFrameCruiser() {
+        //JFrame u = new JFrame();
+        //u.setBounds(frameWidth/2, frameHeight/2, 350, 250);
+        //u.setVisible(true);
+        //u.setAlwaysOnTop(true);
+
+        JOptionPane cruiser = new JOptionPane();
+        int choice = JOptionPane.showConfirmDialog(cruiser, "Place your Cruiser\n Vertically or horizontally only\n Size: 5 squares", "Place Battleships", JOptionPane.OK_CANCEL_OPTION);
+
+
+    }
+
+    static void changeToImageWhenHit() {
 
     }
 
     static void printLeftGridHeadLabel() {
         JLabel leftHL = new JLabel("Your field");
-        leftHL.setBounds((frameWidth/4)+35), 15);
+        leftHL.setBounds((frameWidth/4)-40, 5, 150, 16);
+        leftHL.setFont(new Font("Verdana", Font.BOLD, 14));
+        f.add(leftHL);
     }
 
     static void printLeftGridTopLabels() {
@@ -81,12 +103,13 @@ public class GameBoard {
 
         for(int i = 1; i <= 10; i++){
             for(int j = 1; j <= 10; j++){
-                leftB[i*j] = new JButton();
+                leftB[i*j] = new JButton(new ImageIcon("progData/images/hit3.png"));
                 leftB[i*j].setBounds(width,height,44, 44);
                 leftB[i*j].setEnabled(true);
-                leftB[i*j].setText("X");
+                leftB[i*j].setBackground(new Color(0, 0, 180-(15*i)));
                 f.add(leftB[i*j]);
                 width = width + 44;
+
             }
             width = 79;
             height = height + 44;
@@ -98,6 +121,14 @@ public class GameBoard {
         midLine.setBounds(frameWidth/2, 0, 1, frameHeight);
         midLine.setBorder(blackline);
         f.add(midLine);
+    }
+
+    static void printRightGridHeadLabel() {
+        JLabel rightHL = new JLabel("Opponents field");
+        rightHL.setBounds((frameWidth/4)*3-54, 5, 150, 18);
+        rightHL.setFont(new Font("Verdana", Font.BOLD, 14));
+
+        f.add(rightHL);
     }
 
     static void printRightGridTopLabels() {
@@ -143,9 +174,10 @@ public class GameBoard {
                 rightB[i*j].setBounds(width,height,44, 44);
                 rightB[i*j].setEnabled(true);
                 rightB[i*j].setText("");
+                rightB[i*j].setBackground(new Color(0, 0, 180-(15*i)));
                 f.add(rightB[i*j]);
                 width = width + 44;
-                rightB[i*j].setBackground(new Color(0, 0, 180-(15*i)));
+
             }
             width = (frameWidth/2) + 79;
             height = height + 44;

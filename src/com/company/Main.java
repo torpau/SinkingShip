@@ -12,7 +12,8 @@ public class Main {
         GameBoard.initGameBoard();
 
 
-    }
+
+            }
 
 
     public static void fetchSavedGameData(){
