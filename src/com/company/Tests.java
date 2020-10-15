@@ -19,7 +19,8 @@ public class Tests {
     @Order(1)
     @DisplayName("Tests if saved game exists")
     public void testIfGameIsSaved() {
-        assertTrue(GameProgress.ifGameIsSaved(), "Saved game does not exist");
+        GameProgress gameProgress = new GameProgress();
+        assertTrue(gameProgress.ifGameIsSaved(), "Saved game does not exist");
     }
 
     @Test

@@ -21,14 +21,13 @@ public class GameBoard {
     public static Color[] colors = new Color[10];
 
 
-    public GameBoard() {
-
+    public GameBoard( GameProgress gameProgress) {
+        initGameBoard();
     }
 
-    static void initGameBoard() {
-        //GameBoard.f.setBounds(0, 0, (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+    void initGameBoard() {
         f.setBounds(200, 150, frameWidth, frameHeight);
-        f.setLayout(null);//using no layout managers
+        f.setLayout(null);
         f.setVisible(true);
 
         printLeftGridHeadLabel();
@@ -44,7 +43,7 @@ public class GameBoard {
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                GameProgress.quitGame("Gameboard");
+                quitGame("Gameboard");
             }
         });
 
@@ -76,14 +75,14 @@ public class GameBoard {
 
     }
 
-    static void printLeftGridHeadLabel() {
+    void printLeftGridHeadLabel() {
         JLabel leftHL = new JLabel("Your field");
         leftHL.setBounds((frameWidth/4)-40, 5, 150, 16);
         leftHL.setFont(new Font("Verdana", Font.BOLD, 14));
         f.add(leftHL);
     }
 
-    static void printLeftGridTopLabels() {
+    void printLeftGridTopLabels() {
         int width = 79;
         JLabel[] leftTL = new JLabel[10];
 
@@ -99,7 +98,7 @@ public class GameBoard {
         }
     }
 
-    static void printLeftGridSideLabels() {
+    void printLeftGridSideLabels() {
         int width = 35;
         int height = 79;
         JLabel[] leftSL = new JLabel[10];
@@ -116,7 +115,7 @@ public class GameBoard {
         }
     }
 
-    static void printLeftGridButtons() {
+    void printLeftGridButtons() {
         int width = 79;
         int height = 79;
         int x = 1;
@@ -138,14 +137,14 @@ public class GameBoard {
         }
     }
 
-    static void printMidLine() {
+    void printMidLine() {
         JLabel midLine = new JLabel();
         midLine.setBounds(frameWidth/2, 0, 1, frameHeight);
         midLine.setBorder(blackline);
         f.add(midLine);
     }
 
-    static void printRightGridHeadLabel() {
+    void printRightGridHeadLabel() {
         JLabel rightHL = new JLabel("Opponents field");
         rightHL.setBounds((frameWidth/4)*3-54, 5, 150, 18);
         rightHL.setFont(new Font("Verdana", Font.BOLD, 14));
@@ -153,7 +152,7 @@ public class GameBoard {
         f.add(rightHL);
     }
 
-    static void printRightGridTopLabels() {
+    void printRightGridTopLabels() {
         int width = (frameWidth/2) + 79;
         JLabel[] rightTL = new JLabel[10];
 
@@ -169,7 +168,7 @@ public class GameBoard {
         }
     }
 
-    static void printRightGridSideLabels() {
+    void printRightGridSideLabels() {
         int width = (frameWidth/2) + 35;
         int height = 79;
         JLabel[] rightSL = new JLabel[10];
@@ -186,7 +185,7 @@ public class GameBoard {
         }
     }
 
-    static void printRightGridButtons() {
+    void printRightGridButtons() {
         int width = (frameWidth/2) + 79;
         int height = 79;
         int x = 1;
@@ -202,8 +201,8 @@ public class GameBoard {
                 rightB[i+j].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        GameProgress.pushedButton = e.getActionCommand();
-                        GameProgress.placeShip(GameProgress.currentShip, GameProgress.placeHolder);
+                        GameProgress.setPushedButton(e.getActionCommand());
+                        GameProgress.placeShip(GameProgress.getCurrentShip(), GameProgress.getPlaceHolder());
                     }
                 });
                 f.add(rightB[i+j]);

@@ -8,22 +8,31 @@ import java.io.File;
 import java.util.Scanner;
 
 public class GameProgress {
-    static String pushedButton = "";
-    static String placeHolder;
-    static Ship currentShip;
+    private static String pushedButton = "";
+    private static String placeHolder;
+    private static Ship currentShip;
+
+    public static void setPushedButton(String value){ pushedButton = value; }
+    public static String getPushedButton() { return pushedButton; }
+
+    public static void setPlaceHolder(String value){ placeHolder = value; }
+    public static String getPlaceHolder() { return placeHolder; }
+
+    public static void setCurrentShip(Ship value){ currentShip = value; }
+    public static Ship getCurrentShip() { return currentShip; }
 
     public GameProgress() {
-
+        initGameStart();
     }
     //public static void setPushedButton(String pushedButton) { pushedButton = pushedButton; }
     //public static String getPushedButton() { return pushedButton; }
 
-    static void initGameStart() {
+    void initGameStart() {
         userDialogueCarrier();
 
     }
 
-    static void userDialogueCarrier() {
+    void userDialogueCarrier() {
         placeHolder = "Carrier";
         JOptionPane pane = new JOptionPane();
         int choice = JOptionPane.showConfirmDialog(pane, "Place your Carrier\n Vertically or horizontally only\n Size: 5 squares", "Place Battleships", JOptionPane.OK_CANCEL_OPTION);
@@ -35,7 +44,7 @@ public class GameProgress {
         }
     }
 
-    static void quitGame(String placeHolder) {
+    void quitGame(String placeHolder) {
         JOptionPane quitGame = new JOptionPane();
         Object[] options = {"Yes, quit and save", "No, continue playing"};
         int choice = JOptionPane.showOptionDialog(quitGame, "Do you want to exit the game", "Quit game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -47,7 +56,7 @@ public class GameProgress {
 
     }
 
-    static void saveGame(String placeHolder) {
+    void saveGame(String placeHolder) {
         if(placeHolder.equals("Carrier")){
             JOptionPane noGame = new JOptionPane();
             JOptionPane.showMessageDialog(noGame,"There is no game to save!", "No game", JOptionPane.INFORMATION_MESSAGE);
@@ -59,7 +68,7 @@ public class GameProgress {
 
     }
 
-    static boolean ifGameIsSaved() {
+    boolean ifGameIsSaved() {
         Scanner sc = null;
         File file = new File("progData/savedGame.txt");
         if (file.exists()) {
@@ -76,7 +85,7 @@ public class GameProgress {
     }
 
 
-    static void placeShip(Ship currentShip , String placeHolder) {
+    void placeShip(Ship currentShip , String placeHolder) {
         if(pushedButton.equals("")){
             pushedButton(currentShip, placeHolder);
         }
@@ -105,7 +114,7 @@ public class GameProgress {
         }
     }
 
-    static void pushedButton(Ship currentShip, String placeHolder) {
+    void pushedButton(Ship currentShip, String placeHolder) {
         pushedButton = "";
     }
     /*

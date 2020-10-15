@@ -6,11 +6,16 @@ import java.awt.*;
 
 public class Main {
 
+    public Main(){
+        GameProgress gameProgress = new GameProgress();
+        if(gameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
+        GameBoard gameBoard = new GameBoard(gameProgress);
+
+    }
+
 
     public static void main(String[] args) {
-        if(GameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
-        GameBoard.initGameBoard();
-        GameProgress.initGameStart();
+       new Main();
     }
 
 
