@@ -2,12 +2,15 @@ package com.company;
 
 import javax.accessibility.Accessible;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.Scanner;
 
 public class GameProgress {
-    private static String pushedButton = "";
+    static String pushedButton = "";
+    static String placeHolder;
+    static Ship currentShip;
 
     public GameProgress() {
 
@@ -21,7 +24,7 @@ public class GameProgress {
     }
 
     static void userDialogueCarrier() {
-        String placeHolder = "Carrier";
+        placeHolder = "Carrier";
         JOptionPane pane = new JOptionPane();
         int choice = JOptionPane.showConfirmDialog(pane, "Place your Carrier\n Vertically or horizontally only\n Size: 5 squares", "Place Battleships", JOptionPane.OK_CANCEL_OPTION);
         if (choice == 2 || choice == JOptionPane.CLOSED_OPTION) {
@@ -83,12 +86,14 @@ public class GameProgress {
             for(int i = 0; i < currentShip.getShipLength(); i++){
                 if(Integer.parseInt(pushedButton.substring(6))==pos[i]){
                     currentShip.setPosition(i, 0);
+                    GameBoard.rightB[Integer.parseInt(pushedButton.substring(6))].setBackground(GameBoard.getColor(GameBoard.whichRowColor(Integer.parseInt(pushedButton.substring(6)))));
                     pushedButton = "";
                     break;
                 }
             }
             if(!pushedButton.equals("")) {
                 currentShip.setPosition(Integer.parseInt(pushedButton.substring(6)));
+                GameBoard.rightB[Integer.parseInt(pushedButton.substring(6))].setBackground(GameBoard.getShipFloating());
             }
             System.out.println(pos[0]);
             System.out.println(pos[1]);
@@ -100,10 +105,10 @@ public class GameProgress {
         }
     }
 
-
-
-    static void pushedButton(Ship currentShip, String placeHolder){
+    static void pushedButton(Ship currentShip, String placeHolder) {
         pushedButton = "";
+    }
+    /*
         GameBoard.rightB[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GameProgress.pushedButton = e.getActionCommand();
@@ -118,6 +123,55 @@ public class GameProgress {
             }
 
         });
+        GameBoard.rightB[3].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[4].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[5].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[6].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[7].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[8].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+        GameBoard.rightB[9].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
         GameBoard.rightB[10].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GameProgress.pushedButton = e.getActionCommand();
@@ -125,6 +179,24 @@ public class GameProgress {
             }
 
         });
+        GameBoard.rightB[11].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+
+        });
+
+        GameBoard.rightB[80].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println(e);
+                GameProgress.pushedButton = e.getActionCommand();
+                placeShip(currentShip, placeHolder);
+            }
+        });
     }
+
+     */
 
 }

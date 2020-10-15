@@ -11,8 +11,7 @@ public class Main {
         if(GameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
         GameBoard.initGameBoard();
         GameProgress.initGameStart();
-
-            }
+    }
 
 
     public static void fetchSavedGameData(){
