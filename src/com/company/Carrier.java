@@ -10,14 +10,21 @@ public class Carrier implements Ship {
 
     public int getShipLength() { return shipLength; }
 
+    public void setPosition(int index, int value) {
+        if(value==0){
+            position[index] = 0;
+        }
+    }
+
     public void setPosition(int index) {
         for(int i = 0; i < position.length; i++) {
             if(position[i] == 0) {
                 position[i] = index;
-
+                break;
             }
         }
     }
+
 
     public int[] getPosition() { return position; }
 }

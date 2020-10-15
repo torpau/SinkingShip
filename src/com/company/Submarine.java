@@ -10,6 +10,7 @@ public class Submarine implements Ship {
 
     public int getShipLength() { return shipLength; }
 
+    public void setPosition(int index, int value) {}
     public void setPosition(int index) {}
 
     public int[] getPosition() { return position; }
