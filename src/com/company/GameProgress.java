@@ -82,17 +82,14 @@ public class GameProgress {
 
             for(int i = 0; i < currentShip.getShipLength(); i++){
                 if(Integer.parseInt(pushedButton.substring(6))==pos[i]){
-                  currentShip.setPosition(i, 0);
+                    currentShip.setPosition(i, 0);
+                    pushedButton = "";
+                    break;
                 }
             }
-
-            currentShip.setPosition(Integer.parseInt(pushedButton.substring(6)));
-
-
-
-
-
-
+            if(!pushedButton.equals("")) {
+                currentShip.setPosition(Integer.parseInt(pushedButton.substring(6)));
+            }
             System.out.println(pos[0]);
             System.out.println(pos[1]);
             System.out.println(pos[2]);
