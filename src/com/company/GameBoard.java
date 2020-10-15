@@ -21,11 +21,11 @@ public class GameBoard {
     public static Color[] colors = new Color[10];
 
 
-    public GameBoard( GameProgress gameProgress) {
-        initGameBoard();
+    public GameBoard(GameProgress gameProgress) {
+        initGameBoard(gameProgress);
     }
 
-    void initGameBoard() {
+    void initGameBoard(GameProgress gameProgress) {
         f.setBounds(200, 150, frameWidth, frameHeight);
         f.setLayout(null);
         f.setVisible(true);
@@ -38,12 +38,13 @@ public class GameBoard {
         printRightGridHeadLabel();
         printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
-        printRightGridButtons();
+        printRightGridButtons(gameProgress);
         setColors();
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                quitGame("Gameboard");
+
+                gameProgress.quitGame("Gameboard");
             }
         });
 
@@ -185,7 +186,7 @@ public class GameBoard {
         }
     }
 
-    void printRightGridButtons() {
+    void printRightGridButtons(GameProgress gameProgress) {
         int width = (frameWidth/2) + 79;
         int height = 79;
         int x = 1;
@@ -201,8 +202,8 @@ public class GameBoard {
                 rightB[i+j].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        GameProgress.setPushedButton(e.getActionCommand());
-                        GameProgress.placeShip(GameProgress.getCurrentShip(), GameProgress.getPlaceHolder());
+                        gameProgress.setPushedButton(e.getActionCommand());
+                        gameProgress.placeShip(GameProgress.getCurrentShip(), GameProgress.getPlaceHolder());
                     }
                 });
                 f.add(rightB[i+j]);
