@@ -1,13 +1,19 @@
 package com.company;
 
+import javax.accessibility.Accessible;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.Scanner;
 
 public class GameProgress {
+    private static String pushedButton;
+
     public GameProgress() {
+
     }
+    //public static void setPushedButton(String pushedButton) { pushedButton = pushedButton; }
+    //public static String getPushedButton() { return pushedButton; }
 
     static void initGameStart() {
         userDialogueCarrier();
@@ -67,12 +73,27 @@ public class GameProgress {
 
 
     static void placeShip(String placeHolder) {
+        int i = 1;
+        pushedButton();
+        System.out.println(pushedButton);
+        }
 
+
+
+    static void pushedButton(){
         GameBoard.rightB[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("button pushed");
+                GameProgress.pushedButton = e.getActionCommand();
+                System.out.println(pushedButton);
             }
-        });
 
+        });
+        GameBoard.rightB[2].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getActionCommand());
+            }
+
+        });
     }
+
 }

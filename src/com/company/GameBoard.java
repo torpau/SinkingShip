@@ -1,12 +1,11 @@
 package com.company;
 
+import javax.accessibility.Accessible;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import static java.awt.Component.CENTER_ALIGNMENT;
 
 public class GameBoard {
     public static JFrame f = new JFrame();
@@ -42,8 +41,7 @@ public class GameBoard {
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                System.out.println("mother");
-                System.exit(0);
+                GameProgress.quitGame("Gameboard");
             }
         });
 
@@ -169,7 +167,7 @@ public class GameBoard {
                 rightB[i*j] = new JButton();
                 rightB[i*j].setBounds(width,height,44, 44);
                 rightB[i*j].setEnabled(true);
-                rightB[i*j].setText("");
+                rightB[i*j].setText("rightB"+(i*j));
                 rightB[i*j].setBackground(new Color(0, 0, 180-(15*i)));
                 f.add(rightB[i*j]);
                 width = width + 44;
@@ -179,6 +177,10 @@ public class GameBoard {
             height = height + 44;
         }
     }
+
+
+
+
 
 }
 
