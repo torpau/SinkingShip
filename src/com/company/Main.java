@@ -8,8 +8,11 @@ public class Main {
 
     public Main(){
         GameProgress gameProgress = new GameProgress();
-        GameBoard gameBoard = new GameBoard(gameProgress);
-        gameProgress.initGameStart();
+        GameBoard gameBoard = new GameBoard();
+
+        gameBoard.initGameBoard(gameProgress);
+        gameProgress.initGameStart(gameBoard);
+
         if(gameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
 
 

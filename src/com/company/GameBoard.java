@@ -7,22 +7,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.temporal.ValueRange;
 
 public class GameBoard {
-    public static JFrame f = new JFrame();
-    private static final int frameWidth = 1110;
-    private static final int frameHeight = 560;
-    public static JButton[] leftB = new JButton[101];
-    public static JButton[] rightB = new JButton[101];
-    private static final Font font = new Font("Verdana", Font.PLAIN, 12);
-    private static final Border blackline = BorderFactory.createLineBorder(Color.black);
-    private static final Color shipFloating = new Color(45, 149, 63, 255);
-    private static final Color shipSunk = new Color(179, 11, 11);
-    public static Color[] colors = new Color[10];
+    private final JFrame f = new JFrame();
+    private final int frameWidth = 1110;
+    private final int frameHeight = 591;
+    private final Font font = new Font("Verdana", Font.PLAIN, 12);
+    private final Border blackline = BorderFactory.createLineBorder(Color.black);
+    private final Color shipFloating = new Color(45, 149, 63, 255);
+    private final Color shipSunk = new Color(179, 11, 11);
+    public final JButton[] leftB = new JButton[101];
+    public final JButton[] rightB = new JButton[101];
+    public final Color[] colors = new Color[10];
 
 
-    public GameBoard(GameProgress gameProgress) {
-        initGameBoard(gameProgress);
+    public GameBoard() {
+
     }
 
     void initGameBoard(GameProgress gameProgress) {
@@ -39,31 +40,28 @@ public class GameBoard {
         printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
         printRightGridButtons(gameProgress);
-        setColors();
+        gameProgress.setColors();
+
+        f.repaint();
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
+                //gameProgress.quitGame("Gameboard");
 
-                gameProgress.quitGame("Gameboard");
+                //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });
 
     }
 
-    public static Color getShipFloating() { return shipFloating; }
-    public static Color getShipSunk() { return shipSunk; }
 
+    public Color getShipFloating() { return this.shipFloating; }
+    public Color getShipSunk() { return this.shipSunk; }
 
-    public static void setColors() {
-        for(int i = 1; i < colors.length+1; i++ ) {
-            colors[i-1] = new Color(180-(15*i));
+    //public JButton getRightB(int index) { return rightB[index]; }
+    //public void setRightB(JButton b, int index) { this.rightB[index] = b; }
 
-        }
-    }
-
-    public static Color getColor(int i) { return colors[i];}
-
-    public static int whichRowColor(int index) {
+    public int whichRowColor(int index) {
         if((index%10)==0){
             return (index/10) - 1;
         }
@@ -140,7 +138,7 @@ public class GameBoard {
 
     void printMidLine() {
         JLabel midLine = new JLabel();
-        midLine.setBounds(frameWidth/2, 0, 1, frameHeight);
+        midLine.setBounds(frameWidth/2, 0, 1, frameHeight-36);
         midLine.setBorder(blackline);
         f.add(midLine);
     }
@@ -203,7 +201,7 @@ public class GameBoard {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         gameProgress.setPushedButton(e.getActionCommand());
-                        gameProgress.placeShip(GameProgress.getCurrentShip(), GameProgress.getPlaceHolder());
+                        gameProgress.afterActionCommand();
                     }
                 });
                 f.add(rightB[i+j]);
