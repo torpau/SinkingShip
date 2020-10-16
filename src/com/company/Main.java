@@ -7,8 +7,9 @@ import java.awt.*;
 public class Main {
 
     public Main(){
-        GameBoard gameBoard = new GameBoard(new GameProgress());
         GameProgress gameProgress = new GameProgress();
+        GameBoard gameBoard = new GameBoard(gameProgress);
+        gameProgress.initGameStart();
         if(gameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
 
 

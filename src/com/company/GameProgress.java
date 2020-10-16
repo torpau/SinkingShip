@@ -22,7 +22,6 @@ public class GameProgress {
     public static Ship getCurrentShip() { return currentShip; }
 
     public GameProgress() {
-        initGameStart();
     }
     //public static void setPushedButton(String pushedButton) { pushedButton = pushedButton; }
     //public static String getPushedButton() { return pushedButton; }
