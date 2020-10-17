@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
 import java.time.temporal.ValueRange;
 
 public class GameBoard{
-    private final JFrame f = new JFrame();
+    public final JFrame f = new JFrame();
     private final int frameWidth = 1110;
     private final int frameHeight = 591;
     private final Font font = new Font("Verdana", Font.PLAIN, 12);
@@ -18,7 +18,7 @@ public class GameBoard{
     private final Color shipFloating = new Color(45, 149, 63, 255);
     private final Color shipSunk = new Color(179, 11, 11);
     private final ImageIcon hit = new ImageIcon("progData/images/hit3.png");
-    private final ImageIcon noHit = new ImageIcon("progData/images/noHit.png");
+    private final ImageIcon noHit = new ImageIcon("progData/images/dropp.png");
     public static final JButton[] leftB = new JButton[101];
     public static final JButton[] rightB = new JButton[101];
     private int[][] leftGridArray = new int[101][2];
@@ -218,6 +218,8 @@ public class GameBoard{
                 rightB[i+j].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         gameProgress.setPushedButton(e.getActionCommand());
+                        f.setEnabled(false);
+                        gameProgress.setTurn();
                         rightGridArray[Integer.parseInt(e.getActionCommand().substring(6))][1] = 1;
                         if(rightGridArray[Integer.parseInt(e.getActionCommand().substring(6))][0] > 0) {
                             rightB[Integer.parseInt(e.getActionCommand().substring(6))].setIcon(hit);
@@ -228,6 +230,7 @@ public class GameBoard{
                             rightB[Integer.parseInt(e.getActionCommand().substring(6))].setEnabled(false);
                             rightB[Integer.parseInt(e.getActionCommand().substring(6))].setDisabledIcon(noHit);
                         }
+
                     }
                 });
                 f.add(rightB[i+j]);

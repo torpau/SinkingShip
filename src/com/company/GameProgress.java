@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class GameProgress extends GameBoard{
     private String pushedButton = "";
     private Ship currentShip;
     private GameBoard gameBoardTemp;
-
     private Color[] colors = new Color[10];
+    private boolean yourTurn = true;
 
     public void setGameBoard(GameBoard gameBoard) {
         this.gameBoardTemp = gameBoard;
@@ -146,7 +147,30 @@ public class GameProgress extends GameBoard{
         }
     }
 
-    //public setTurn() {
+    void setTurn() {
+        JLabel turnLabel = new JLabel("Opponents turn");
+        Font font = new Font("Verdana", Font.BOLD, 46);
+        turnLabel.setFont(font);
+        turnLabel.setBackground(new Color(128, 222, 173));
+        turnLabel.setVisible(true);
+        turnLabel.setHorizontalAlignment(JLabel.CENTER);
+        turnLabel.setVerticalAlignment(JLabel.CENTER);
+        turnLabel.setBounds(0, 0, 200, 100);
+        //turnLabel.setComponentZOrder(JLabel.TOP, 1);
+
+
+            if (yourTurn) {
+                yourTurn = false;
+                f.add(turnLabel);
+                turnLabel.validate();
+                turnLabel.repaint();
+            } else {
+                yourTurn = true;
+                f.remove(turnLabel);
+            }
+    }
+
+    boolean getTurn () { return yourTurn; }
 
 
     public void afterActionCommand(){ pushedButton = ""; }
