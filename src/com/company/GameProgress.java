@@ -146,6 +146,8 @@ public class GameProgress extends GameBoard{
         }
     }
 
+    //public setTurn() {
+
 
     public void afterActionCommand(){ pushedButton = ""; }
 
@@ -156,8 +158,8 @@ public class GameProgress extends GameBoard{
 
         System.out.println( "test"+rightGrid[3][0]);
 
-
     }
+
 
 
 }

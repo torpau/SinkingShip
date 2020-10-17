@@ -17,8 +17,12 @@ public class GameBoard{
     private final Border blackline = BorderFactory.createLineBorder(Color.black);
     private final Color shipFloating = new Color(45, 149, 63, 255);
     private final Color shipSunk = new Color(179, 11, 11);
+    private final ImageIcon hit = new ImageIcon("progData/images/hit3.png");
+    private final ImageIcon noHit = new ImageIcon("progData/images/noHit.png");
     public static final JButton[] leftB = new JButton[101];
     public static final JButton[] rightB = new JButton[101];
+    private int[][] leftGridArray = new int[101][2];
+    private int[][] rightGridArray = new int[101][2];
     public final Color[] colors = new Color[10];
 
 
@@ -35,13 +39,14 @@ public class GameBoard{
         printLeftGridHeadLabel();
         printLeftGridTopLabels();  //vår planhalva
         printLeftGridSideLabels();
-        printLeftGridButtons();
+        printLeftGridButtons(gameProgress);
         printMidLine();
         printRightGridHeadLabel();
         printRightGridTopLabels(); //motståndarens
         printRightGridSideLabels();
         printRightGridButtons(gameProgress);
         gameProgress.setColors();
+        placeOpponentsShipOnRightGrid();
 
         f.repaint();
 
@@ -53,6 +58,12 @@ public class GameBoard{
 
         gameProgress.setGameBoard(this);
     }
+
+    private void setLeftGridArrayAtIndex(int leftBIndex, int shipOrNot, int value) { leftGridArray[leftBIndex][shipOrNot] = value; }
+    private int getLeftGridArrayFromIndex(int leftBIndex, int shipOrNot) { return leftGridArray[leftBIndex][shipOrNot]; }
+
+    private void setRightGridArrayAtIndex(int rightBIndex, int shipOrNot, int value) { rightGridArray[rightBIndex][shipOrNot] = value; }
+    private int getRightGridArrayFromIndex(int rightBIndex, int shipOrNot) { return rightGridArray[rightBIndex][shipOrNot]; }
 
 
     public Color getShipFloating() { return this.shipFloating; }
@@ -114,7 +125,7 @@ public class GameBoard{
         }
     }
 
-    void printLeftGridButtons() {
+    void printLeftGridButtons(GameProgress gameProgress) {
         int width = 79;
         int height = 79;
         int x = 1;
@@ -127,6 +138,12 @@ public class GameBoard{
                 leftB[i+j].setBackground(new Color(0, 0, 180-(15*x)));
                 leftB[i+j].setText("leftB" + (i+j));
                 leftB[i+j].setForeground(new Color(0, 0, 180-(15*x)));
+                leftB[i+j].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        gameProgress.setPushedButton(e.getActionCommand());
+                        gameProgress.placeShip(gameProgress.getCurrentShip());
+                    }
+                });
                 f.add(leftB[i+j]);
                 width = width + 44;
             }
@@ -200,18 +217,43 @@ public class GameBoard{
                 rightB[i+j].setForeground(new Color(0, 0, 180-(15*x)));
                 rightB[i+j].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-
                         gameProgress.setPushedButton(e.getActionCommand());
-                        gameProgress.placeShip(gameProgress.getCurrentShip());
+                        rightGridArray[Integer.parseInt(e.getActionCommand().substring(6))][1] = 1;
+                        if(rightGridArray[Integer.parseInt(e.getActionCommand().substring(6))][0] > 0) {
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setIcon(hit);
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setEnabled(false);
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setDisabledIcon(hit);
+                        } else {
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setIcon(noHit);
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setEnabled(false);
+                            rightB[Integer.parseInt(e.getActionCommand().substring(6))].setDisabledIcon(noHit);
+                        }
                     }
                 });
                 f.add(rightB[i+j]);
                 width = width + 44;
+                rightB[i+j].repaint();
             }
             width = (frameWidth/2) + 79;
             height = height + 44;
             x++;
         }
+    }
+
+    void placeOpponentsShipOnRightGrid() {
+        rightGridArray[1][0] = 1;
+        rightGridArray[2][0] = 1;
+        rightGridArray[3][0] = 1;
+        rightGridArray[4][0] = 1;
+        rightGridArray[5][0] = 1;
+
+        /*
+        1	  Carrier	        5
+        2	  Battleship	    4
+        3	  Cruiser	        3
+        4	  Submarine 	    3
+        5	  Destroyer	        2
+    */
     }
 
 
