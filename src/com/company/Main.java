@@ -11,6 +11,7 @@ public class Main {
         GameBoard gameBoard = new GameBoard();
 
         gameBoard.initGameBoard(gameProgress);
+
         gameProgress.initGameStart(gameBoard);
 
         if(gameProgress.ifGameIsSaved()) { fetchSavedGameData(); }
@@ -20,7 +21,13 @@ public class Main {
 
 
     public static void main(String[] args) {
+
        new Main();
+
+        int[][] rightGrid = new int[101][2];
+
+
+        System.out.println( "test"+rightGrid[3][0]);
     }
 
 

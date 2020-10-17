@@ -9,7 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.temporal.ValueRange;
 
-public class GameBoard {
+public class GameBoard{
     private final JFrame f = new JFrame();
     private final int frameWidth = 1110;
     private final int frameHeight = 591;
@@ -17,8 +17,8 @@ public class GameBoard {
     private final Border blackline = BorderFactory.createLineBorder(Color.black);
     private final Color shipFloating = new Color(45, 149, 63, 255);
     private final Color shipSunk = new Color(179, 11, 11);
-    public final JButton[] leftB = new JButton[101];
-    public final JButton[] rightB = new JButton[101];
+    public static final JButton[] leftB = new JButton[101];
+    public static final JButton[] rightB = new JButton[101];
     public final Color[] colors = new Color[10];
 
 
@@ -30,6 +30,7 @@ public class GameBoard {
         f.setBounds(200, 150, frameWidth, frameHeight);
         f.setLayout(null);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         printLeftGridHeadLabel();
         printLeftGridTopLabels();  //vår planhalva
@@ -46,12 +47,11 @@ public class GameBoard {
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                //gameProgress.quitGame("Gameboard");
-
-                //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gameProgress.quitGame("Gameboard");
             }
         });
 
+        gameProgress.setGameBoard(this);
     }
 
 
@@ -70,9 +70,9 @@ public class GameBoard {
         }
     }
 
-    static void changeToImageWhenHit() {
+    static void changeToImageWhenHit() {}
 
-    }
+
 
     void printLeftGridHeadLabel() {
         JLabel leftHL = new JLabel("Your field");
@@ -181,6 +181,7 @@ public class GameBoard {
             rightSL[i].setFont(font);
             f.add(rightSL[i]);
             height = height + 44;
+
         }
     }
 
@@ -198,10 +199,10 @@ public class GameBoard {
                 rightB[i+j].setText("rightB" + (i+j));
                 rightB[i+j].setForeground(new Color(0, 0, 180-(15*x)));
                 rightB[i+j].addActionListener(new ActionListener() {
-                    @Override
                     public void actionPerformed(ActionEvent e) {
+
                         gameProgress.setPushedButton(e.getActionCommand());
-                        gameProgress.afterActionCommand();
+                        gameProgress.placeShip(gameProgress.getCurrentShip());
                     }
                 });
                 f.add(rightB[i+j]);
